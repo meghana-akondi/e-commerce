@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Compare</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Compare Products</h1>
+        <form method="post" class="search-form">
+            <input type="text" name="query" placeholder="Search for products" required>
+            <button type="submit">Search</button>
+        </form>
+        
+        {% if flipkart_results or ebay_results %}
+            <div class="results">
+                <div class="results-column">
+                    <h2>Flipkart Results</h2>
+                    {% for product in flipkart_results %}
+                        <div class="product">
+                            <a href="{{ product.url }}" target="_blank" class="product-name">{{ product.name }}</a>
+                            <p class="product-price">Price: {{ product.price }}</p>
+                            <p class="product-rating">Rating: {{ product.rating }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="results-column">
+                    <h2>eBay Results</h2>
+                    {% for product in ebay_results %}
+                        <div class="product">
+                            <a href="{{ product.url }}" target="_blank" class="product-name">{{ product.name }}</a>
+                            <p class="product-price">Price: {{ product.price }}</p>
+                            <p class="product-rating">Rating: {{ product.rating }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
